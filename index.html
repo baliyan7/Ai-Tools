@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Ai Tools</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+    <section class="Section">
+        <div class="div1">
+            <h1>Free AI Tools</h1>
+        </div>
+        <input type="checkbox" id="checkbox">
+
+        <div class="div2">
+            <label for="checkbox"><img src="./icons/back.png" alt="Close Icon" class="CloseIcon">
+                <h2>More Ai tools</h2>
+            </label>
+            <div class="multi_menu">
+                <div><img src="./icons/speech-to-text.png" alt="Icon"><a href="#">Text to Speech</a></div>
+                <div><img src="./icons/edit-image.png" alt="Icon"><a href="#">Image Generator</a></div>
+                <div><img src="./icons/video.png" alt="Icon"><a href="#">Video Generator</a></div>
+                <div><img src="./icons/caption.png" alt="Icon"><a href="#">Caption Generator</a></div>
+                <div><img src="./icons/eraser.png" alt="Icon"><a href="#">Remove Background</a></div>
+                <div><img src="./icons/account.png" alt="Icon"><a href="#">Inhence Image</a></div>
+            </div>
+
+        </div>
+        <div class="div3">
+            <input type="text" id="user-input" placeholder="How can i help you !" onkeydown="if(event.key === 'Enter') sendMessage()">
+            <img src="./icons/send.png" alt="Icon" onclick="sendMessage()"></div>
+        </div>
+        <label for="checkbox" class="OpenIcon"><img src="./icons/list.png" alt="OpenIcon"></label>
+        <div class="div4">
+        </div>
+        <div class="div5">
+            <div class="chat-box" id="chat-box"></div>
+        </div>
+        <div class="div6"></div>
+    </section>
+
+    <!-- <section class="Section">
+        <div class="div1">header(1 row, 12 column) <h1>Free AI Tools</h1></div>
+        <div class="div2">sidebar(10 row, 3 column)</div>
+        <div class="div3">navigation(1 row, 6 column)</div>
+        <div class="div4">ads(10 row, 3 column)</div>
+        <div class="div5">main(9 row, 6 column)</div>
+        <div class="div6">footer(1 row, 12 column)</div>
+    </section> -->
+    <!-- <h1>Loader</h1>
+    <div class="loader"></div> -->
+    <script src="travel_chatbot_styled.js"></script>
+</body>
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    
+    // Simulated responses for travel queries
+    const travelResponses = {
+        'flights': 'I can help you find flights! Where would you like to go?',
+        'hotels': 'Looking for hotels? Please provide your destination and dates.',
+        'destinations': 'Popular destinations: Paris, Tokyo, New York, Bali. Where would you like to explore?',
+        'book': 'You can book flights and hotels by visiting our booking page.',
+        'hello': 'Hello! I am your travel assistant. How can I help you today?',
+        'bye': 'Goodbye! Have a great trip!',
+    };
+    
+    function sendMessage() {
+        const userText = userInput.value.trim();
+        if (!userText) return;
+    
+        addMessageToChat(userText, 'user-message');
+        userInput.value = '';
+    
+        // Simulate bot response after a short delay
+        setTimeout(() => {
+            const botResponse = getTravelBotResponse(userText);
+            addMessageToChat(botResponse, 'bot-message');
+        }, 1000);
+    }
+    
+    function addMessageToChat(text, className) {
+        const messageElement = document.createElement('p');
+        messageElement.className = className;
+        messageElement.textContent = text;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
+    }
+    
+    function getTravelBotResponse(userText) {
+        userText = userText.toLowerCase();
+        
+        // Check for specific travel-related keywords
+        if (userText.includes('flight')) {
+            return travelResponses['flights'];
+        } else if (userText.includes('hotel')) {
+            return travelResponses['hotels'];
+        } else if (userText.includes('destination')) {
+            return travelResponses['destinations'];
+        } else if (userText.includes('book')) {
+            return travelResponses['book'];
+        } else if (userText.includes('hello') || userText.includes('hi')) {
+            return travelResponses['hello'];
+        } else if (userText.includes('bye')) {
+            return travelResponses['bye'];
+        }
+        
+        return "I am not sure how to help with that. Try asking about flights, hotels, or destinations.";
+    }
+    
+</script>
+</html>
